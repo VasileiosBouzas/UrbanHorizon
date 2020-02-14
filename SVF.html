@@ -1,0 +1,1126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<title>Application - Urban Horizon</title>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="icon" type="image/ico" href="Images/favicon.ico">
+    <style type="text/css">
+
+		body,h1,h2,h3,h4,h5,h6 {
+			font-family: "Lato",
+			sans-serif
+		}
+		
+		.w3-bar,h1,button {
+		font-family: "Montserrat", 
+		sans-serif
+		}
+		
+		.fa-anchor,.fa-coffee,.fa-info-circle,.fa-users, .fa-briefcase, .fa-at, .fa-envelope {
+		font-size:200px
+		}
+	
+        body {
+            margin: 1px;
+        }
+		
+        #map {
+            position: absolute;
+            top: 92px;
+            width: calc(100% - 740px);
+            height: calc(100% - 93px);
+            border: 1px solid black;
+            left: 290px;
+            min-width: 400px;
+        }
+		
+        #olattribution {
+            position: absolute;
+            margin: 0px 15px;
+            bottom: 0px;
+            z-index: 1;
+        }
+
+        #banner {
+            position: absolute;
+            top: 100%;
+            height: 40px;
+            background-color: #9fd0f9;
+            width: 100%;
+        }
+		
+        #toolbar_1 {
+            position: absolute;
+            top: 10%;
+            left: 290px;
+        }
+		
+        #toolbar_2 {
+            position: absolute;
+            top: 10%;
+            left: 0.1%;
+        }
+		
+        #toolbar_map {
+            position: absolute;
+            margin: 5px 3px;
+            right: 0px;
+        }
+		
+        #CC {
+            position: absolute;
+            margin: 5px 5px;
+            right: 0px;
+            bottom: 0px;
+            z-index: 1;
+        }
+
+        #SVFimage{
+            position: absolute;
+            top: 86px;
+            border: none;
+            left: calc(100% - 460px);
+            z-index: -1;
+        }
+
+		
+        #loader {
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+        }
+		
+        #legend {
+            position: absolute;
+            top: 525px;
+            left: calc(100% - 460px);
+            z-index: -1;
+			margin-left: 10px;
+            display: none;
+        }
+		
+        button {
+            position:relative;
+            height: 30px;
+            width:25px;
+            background-color: #2196F3;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 5px 5px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 1;
+        }
+		
+        a.fa {
+            text-decoration: none;
+            position:relative;
+            top: 1px;
+            height: 30px;
+            width:25px;
+            background-color: #2196F3;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 7px 5px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 1;
+        }
+		
+        #CC-CC, #CC-BY, #CC-NC {
+            text-decoration: none;
+            color: #085391;
+        }
+
+        #togglelayer, #togglepoly {
+            right: -30px;
+            padding: 0px 0px;
+        }
+
+        #togglezoom {
+            top: 33px;
+            padding: 0px 0px;
+			margin: 0px 2px;
+        }
+        
+        input {
+            position:absolute;
+            height: 0px;
+            width:0px;
+            z-index: -1;
+            opacity: 0;
+        }
+		
+        button:hover, a.fa:hover {
+            background-color: #085391;
+        }
+		
+		#contain {
+    		width: calc(100% - 740px);
+            height: calc(100% - 93px);
+		}
+		
+        #start:focus, #select:focus {
+            background-color: black;
+        }
+		
+        #myTableSpace {
+            position: absolute;
+            display: block;
+            top: 92px;
+            width: 288px;
+            height: calc(100% - 93px);
+            overflow-y: auto;
+        }
+
+        #myTable {
+            width: 100%;
+            border: 1px;
+            top:92px;
+            text-align: center;
+            border-collapse: collapse;
+        }
+		
+        #percentage {
+            position: absolute;
+            top: 614px;
+            left: calc(100% - 460px);
+            z-index: -1;
+            margin-left: 11px;
+        }
+		
+        #percentageTB {
+            width: 449px;
+            float: left;
+            border: none;
+            text-align: center;
+            border-collapse: collapse;
+            display: none;
+        }
+		
+		@media all and (max-width: 1140px){
+        	#SVFimage, #legend, #percentage {
+        		left: 680px;
+        	}
+        }
+        th {
+            border: 1px;
+            border-style: solid;
+            border-color: #085391;
+            background-color: #2196F3;
+            color: #ffffff;
+        } 
+		
+        td {
+            border: 1px;
+            border-style: solid;
+            border-color: #085391;
+        }
+		
+        tr:hover {
+            background-color: #9fd0f9;
+        }
+		
+        tr:active {
+            background-color: #cfe8fc;
+        }
+		
+        html {
+            display:block;
+            overflow:auto;
+        }
+		
+		#transparent {
+    		opacity: 0.0;
+    		position:absolute;
+    		width: 99%;
+            height: 99%;
+    		background: rgba(100, 100, 0, 0.8);
+    		z-index: 1;
+		}
+
+    </style>
+
+    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js"></script>
+    <script src="https://epsg.io/28992.js"></script>
+    <script src="JScripts/papaparse.min.js"></script>
+</head>
+<body>
+	<!-- Create Container so map and mask (that disables double clicks) overlay -->
+	<div id="contain">
+		<div id="map" class="map">
+			<div id="olattribution"></div>
+            <div id="toolbar_map">
+				<button id='togglelayer' class="fas fa-map" title="Toggle Background" onclick ="togglelayer()"></button>
+				<button id='togglepoly' class="fas fa-home" title="Toggle Building Footprints" onclick ="togglepolygons()"></button>
+                <button id="togglezoom" class="fas fa-crosshairs" title="Toggle Zoom on Selection" onclick="togglezoom()"></button>
+			</div>
+		    <div id="CC">
+                <a id='CC-CC' class="fab fa-creative-commons w3-xlarge" href="http://creativecommons.org/licenses/by-nc/4.0/"></a>
+                <a id='CC-BY' class="fab fa-creative-commons-by w3-xlarge" href="http://creativecommons.org/licenses/by-nc/4.0/"></a>
+                <a id='CC-NC' class="fab fa-creative-commons-nc w3-xlarge" href="http://creativecommons.org/licenses/by-nc/4.0/"></a>
+            </div>
+        </div>
+		<img id="transparent" src="Images/transparent.png" style='display: none;'  align=middle />
+	</div>
+    <div id="SVFimage"></div>
+	<img id="legend" src="Images/legend.png" style='display: none;'/>
+	<div id="percentage">
+		<!-- Table result with percentages of sky -->
+		<table id= "percentageTB">
+            <tr>
+               <td></td>
+               <th>Unobstructed Vision</th>
+               <th colspan="2">Obstructed Vision</th>
+            </tr>
+			<tr>
+			   <th>ID</th>
+			   <th>Sky View Factor</th>
+			   <th>Vegetation</th>
+			   <th>Building</th>
+			</tr>
+			
+			<!-- Need this, introduces new row to table for number results -->
+			<tr id="contentRow">
+			   <td></td>
+			   <td></td>
+			   <td></td>
+			   <td></td>
+			</tr>
+		</table>
+	</div>
+	<!-- Table containing basic information on points (coordinates, SVF) -->
+	<div id="myTableSpace">
+        <table id="myTable" >
+    		<tr>
+    			<th>ID</th>
+    			<th>X</th>
+    			<th>Y</th>
+    			<th>SVF</th>
+    		</tr>
+    	</table>
+    </div>
+	<!-- Gif appearing during loading time of calculation process -->
+	<img id="loader" src="Images/reload.gif" width='288px' height='288px' style='display: none;'>
+	<!-- Navbar -->
+	<div class="w3-top">
+		
+		<div class="w3-bar w3-blue w3-card w3-left-align w3-large">
+			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-blue" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+			<a href="Home.html" class="w3-bar-item w3-button w3-padding-large w3-hover-white">Home</a>
+			<a href="SVF.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-white">Application</a>
+			<a href="Tutorial.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Tutorial</a>
+			<a href="Documentation.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Documentation</a>
+		</div>
+		<!-- Navbar on small screens/ Icon Appears on top-right with drop down list -->
+		<div id="navDemo" class="w3-bar-block w3-light-blue w3-hide w3-hide-large w3-hide-medium w3-large">
+			<a href="SVF.html" class="w3-bar-item w3-button w3-padding-large">Application</a>
+			<a href="Tutorial.html" class="w3-bar-item w3-button w3-padding-large">Tutorial</a>
+			<a href="Documentation.html" class="w3-bar-item w3-button w3-padding-large">Documentation</a>
+		</div>
+	
+		<!-- Bar containing function buttons -->
+		<div id="banner" class="w3-top">
+			<div id="toolbar_1" class="btn-group">
+				<button id="start" class="fas fa-pencil-alt" title="Draw Points"></button>
+				<button id="stop" class="fas fa-ban" title="Stop Drawing"></button>
+				<button id="select" class="fas fa-mouse-pointer" title="Select Point"></button>
+				<button id="delete" class="fas fa-times" title="Delete Selected Point"></button>
+				<button id="removebuild" class="far fa-eye-slash" title="Ignore Building"></button>
+				<button id="addbuild" class="fas fa-plus" title="Add New Building"></button>
+				<button id="undo" class="fas fa-undo" title="Undo Calculation"></button>
+				<button id="clear" class="fas fa-eraser " title="Clear Canvas"></button>
+				<button id="SVF" class="fas fa-calculator " title="Calculate SVF" ></button>
+			</div>
+			<div id=toolbar_2>
+				<input type="file" id="files"  class="form-control" accept=".csv" required />
+				<button type="submit" id="submit-file" class="fa fa-upload" title="Upload Points"></button>
+				<a href="#" id="xx" class="fa fa-download" title="Export Table to Excel"></a>
+			</div>
+		</div>
+	</div>
+</div>	
+</body>
+<script>
+    // Retrieve data from OpenLayer Map layer
+    var source = new ol.source.Vector({wrapX: false});
+    var source1 = new ol.source.Vector({wrapX: false});
+    var source2 = new ol.source.Vector({wrapX: false});
+    var vectorLayer = new ol.layer.Vector({source: source});
+    var vectorLayer1 = new ol.layer.Vector({source: source1});
+    var vectorLayer2 = new ol.layer.Vector({source: source2});
+    // Initialize variables
+    var draw; // global so we can remove it later
+    var featureID = 0;
+    var singleClick;
+    var selectedFeatureID = 0;
+    var ccord;
+    var flag = 0;
+    var removeNum = 0;
+    var buildingPercent = {};
+    var treePercent = {};
+    var currentDate = new Date();
+    var userID = currentDate.getTime();
+    var deleted = 0;
+    var selectedFeature;
+    var stopremovevar = true;
+    var stopselectvar = true;
+    var zoomselectvar = true;
+    // Set initial view position
+    var view =  new ol.View({
+                center: centerWebMercator,
+                zoom: 17,
+                });
+    var viewProjection = view.getProjection();
+    var viewResolution = view.getResolution();
+    var container = document.getElementById('information')
+      
+      
+    var databuild = [{"key":"0"}];
+    var bcnt = 1;
+    var bcnt_p = 1;
+    var addedbuild = [{"key":"0"}];
+      
+
+    
+    // Inserted Points Style Function
+    function styleFunction(description) {
+        return [
+            new ol.style.Style({
+                image: new ol.style.Circle({
+                    fill: new ol.style.Fill({
+                    color: '#2196F3'
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: '#ffffff',
+                        width: 1
+                    }),
+                    radius: 11
+                }),
+         
+                text: new ol.style.Text({
+                    font: '16px Calibri,sans-serif',
+                    fill: new ol.style.Fill({ color: '#ffffff' }),
+                    stroke: new ol.style.Stroke({
+                        color: '#ffffff', 
+                        width: 1
+                    }),
+                // get the text from the feature - `this` is ol.Feature
+                text: description
+                })
+            })
+        ];
+    }  
+    // Selected Point Style function
+    function styleFunctionSelect(description) {
+        return [
+            new ol.style.Style({
+                image: new ol.style.Circle({
+                    fill: new ol.style.Fill({
+                        color: '#085391'
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: '#ffffff',
+                        width: 2
+                    }),
+                    radius: 15
+                }),
+         
+                text: new ol.style.Text({
+                    font: '22px Calibri,sans-serif',
+                    fill: new ol.style.Fill({ color: '#ffffff' }),
+                    stroke: new ol.style.Stroke({
+                        color: '#ffffff', width: 1
+                    }),
+                    // get the text from the feature - `this` is ol.Feature
+                    text: description
+                })
+            })
+        ];
+    }          
+            
+    // Topographic map layer
+    var baselayer = new ol.layer.Tile({
+        source: new ol.source.OSM()
+    });
+    baselayer.setVisible(true);
+    
+    // Layer of Airplane Captured photos
+    var satlayer = new ol.layer.Tile({
+        source: new ol.source.TileWMS({
+            url: 'https://geodata.nationaalgeoregister.nl/luchtfoto/rgb/wms',
+            params: {'LAYERS': 'Actueel_ortho25', 'FORMAT':'image/png'},
+            minZoom: 100,
+            maxZoom: 200
+        })
+    });
+    satlayer.setVisible(false);
+    // Building footprint images retrieved from PDOK
+    var polylayer = new ol.layer.Tile({
+        source: new ol.source.TileWMS({
+            url: 'https://geodata.nationaalgeoregister.nl/bag/wms',
+            params: {'LAYERS': 'pand', 'FORMAT':'image/png'},
+            opacity: 0.0
+        })
+    });
+      
+    // Response from request about the Hague's municipality borders
+    var boundarylayer = new ol.layer.Tile({
+        source: new ol.source.TileWMS({
+            url: 'https://geodata.nationaalgeoregister.nl/bestuurlijkegrenzen/wfs?&TYPENAME=bestuurlijkegrenzen:gemeenten&SRSNAME=EPSG:3857&cql_filter=(bestuurlijkegrenzen:code=%270518%27)',
+            params: {'LAYERS': 'gemeenten', 'FORMAT': 'image/png'}
+        })
+    });
+      
+    var layers = [baselayer, satlayer, polylayer,boundarylayer, vectorLayer1, vectorLayer2, vectorLayer]
+      
+
+    // Initialization of map focus
+    var centerLonLat = [4.30046, 52.07455]; //This is for The Hague, use zoomlevel 12
+    // var centerLonLat = [4.373003, 52.0006821];
+    var centerWebMercator = ol.proj.fromLonLat(centerLonLat);
+      
+    var map = new ol.Map({
+        layers: layers,
+        target: 'map',
+        controls: ol.control.defaults({
+            attributionOptions: {
+                target: document.getElementById('olattribution')
+            }
+        }),
+        view: new ol.View({
+            center: centerWebMercator,
+            zoom: 12
+        })
+    });
+
+    // "Start drawing Points" button function
+    $("button#start").on("click", function (event) {
+        // Disable "stopremovevar" and "stopselectvar" states
+        stopremovevar = true;
+        stopselectvar = true;
+        map.removeInteraction(draw);
+        map.removeInteraction(singleClick);
+        addInteraction();  
+    });
+    
+    // "Stop creating Points" function
+    $("button#stop").on("click", function (event) {
+        stopremovevar = true;
+        stopselectvar = true;
+        map.removeInteraction(singleClick);
+        map.removeInteraction(draw);
+    });
+    
+    // "Select Point" function
+    $("button#select").on("click", function (event) {
+        stopselectvar = false;
+        stopremovevar = true;
+        map.removeInteraction(draw);
+        select();
+    });
+    
+    // "Point Deletion" function
+    $("button#delete").on("click", function (event) {
+        map.removeInteraction(draw);
+        stopremovevar = true;
+        stopselectvar = true; 
+        remove();
+    });
+    
+    // "Remove Calculation Results" Button function
+    $("button#undo").on("click", function (event) {
+        map.removeInteraction(draw);
+        stopremovevar = true;
+        stopselectvar = true;
+        undo();
+    });
+    
+    // Button Function to initialize "Building Removal" function
+    $("button#removebuild").on("click", function (event) {
+        map.removeInteraction(draw);
+        stopremovevar = false;
+        stopselectvar = true;
+        removebuild();
+    });
+      
+    // Button Function to initialize "Building Addition" function  
+    $("button#addbuild").on("click", function (event) {
+        map.removeInteraction(draw);
+        stopremovevar = true;
+        stopselectvar = true;
+        addPoly();
+    });
+    
+    // Button function to initialize "Clear Canvas" function
+    $("button#clear").on("click", function (event) {
+        map.removeInteraction(singleClick);
+        map.removeInteraction(draw);
+        stopremovevar = true;
+        stopselectvar = true;
+        clearCanvas();
+    });      
+    
+    // Button function to initiate the SVF calculation
+    $("button#SVF").on("click", function (event) {
+        stopremovevar = true;
+        stopselectvar = true;
+        sendData()  
+    });
+    
+    // Function to make Image Plot and Percentages Table appear on point selection from table
+    $('#myTable').on('click', 'tr', function(){
+        var table = document.getElementById("myTable");
+        var row = table.rows[selectedFeatureID];
+        if (selectedFeatureID > 0){
+            selectedFeature.setStyle(styleFunction(selectedFeatureID.toString()));
+            row.style.backgroundColor = '#ffffff'
+        };
+        currentIndex = $(this).index();
+        if (currentIndex != 0){
+            selectedFeatureID = currentIndex;
+        }
+        if (selectedFeatureID <= flag){
+            var features = source.getFeatures();
+            if (features != null && features.length > 0) {
+                for (x in features) {
+                    var properties = features[x].getProperties();
+                    var id = properties.id;
+                    if (id == selectedFeatureID) {
+                        $("#legend").show();
+                        $("#percentageTB").show();
+                        // Create percentage table
+                        var cellPercentege = document.getElementById("percentageTB").rows.namedItem("contentRow").cells;
+                        cellPercentege[0].innerHTML = selectedFeatureID;
+                        cellPercentege[1].innerHTML = table.rows[selectedFeatureID].cells[3].innerHTML;
+                        cellPercentege[2].innerHTML = treePercent[selectedFeatureID];
+                        cellPercentege[3].innerHTML = buildingPercent[selectedFeatureID];
+                        // Retrieve SVF plot corresponding to point
+                        var imgstr = '../SynthesisProject/Plots/' + userID + '_' + 'point' + id + '.png';
+                        document.getElementById("SVFimage").innerHTML = '<img id="plotimg" src="'+ imgstr +'"/>';
+                        break;
+                    }
+                }  
+            }
+        }
+        var features = source.getFeatures();
+        if (features != null && features.length > 0) {
+            for (x in features) {
+                var properties = features[x].getProperties();
+                var id = properties.id;
+                if (id == selectedFeatureID) {
+                    selectedFeature = features[x];
+                    if (zoomselectvar == true) {
+                        var ext = selectedFeature.getGeometry().getCoordinates();
+                        map.getView().animate({center:ext,zoom:18});
+                    }
+                    break;
+                }
+            }  
+        }
+      
+        selectedFeature.setStyle(styleFunctionSelect(selectedFeatureID.toString()))
+      
+        row = table.rows[selectedFeatureID];
+        row.style.backgroundColor = '#cfe8fc'
+    });
+    
+    // Function about creating points on map canvas
+    var addInteraction = function () {
+        draw = new ol.interaction.Draw({
+            source: source,
+            type: "Point"
+        });
+        
+        map.addInteraction(draw); //allows drawing point on map
+
+        // Nested function initialized when clicking on the map layer
+        draw.on('drawend', function (event) {
+            // Bring transparent image on the front, making user unable of clicking on the map for set time
+            $("#transparent").show();
+            setTimeout(function removeMask() {
+                $("#transparent").hide()
+                }, 200); //wait 0.2 seconds to re-enable clicking
+            featureID = featureID + 1;
+            // Inserts Point information on table
+            var table = document.getElementById("myTable");
+            var row = table.insertRow(featureID);
+            row.id = featureID;
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell1.innerHTML = featureID;
+            var coords = ol.proj.transform(event.feature.getGeometry().getCoordinates(), 'EPSG:3857', 'EPSG:28992');
+            cell2.innerHTML = coords[0].toFixed(3);
+            cell3.innerHTML = coords[1].toFixed(3);
+            event.feature.setProperties({
+               'id': featureID
+            })
+            event.feature.setStyle(styleFunction(featureID.toString()))
+        })
+    };
+    
+    // Function to make Image Plot and Percentages Table appear on point selection from map canvas
+    var select = function () {
+        singleClick = new ol.interaction.Select({
+            layers: [vectorLayer]
+        });
+        map.addInteraction(singleClick);
+        singleClick.getFeatures().on('add', function(event){
+            if (stopselectvar == true) {
+                map.removeInteraction(singleClick);
+                return;
+            };
+            var properties = event.element.getProperties();
+            var table = document.getElementById("myTable");
+            var row = table.rows[selectedFeatureID];
+            if (selectedFeatureID !== 0){
+                selectedFeature.setStyle(styleFunction(selectedFeatureID.toString()));
+                row.style.backgroundColor = '#ffffff'
+            };
+            selectedFeatureID = properties.id;
+            selectedFeature = event.element;
+            selectedFeature.setStyle(styleFunctionSelect(selectedFeatureID.toString()))
+            row = table.rows[selectedFeatureID];
+            row.style.backgroundColor = '#cfe8fc';
+            if (selectedFeatureID <= flag){
+                var features = source.getFeatures();
+                if (features != null && features.length > 0) {
+                    for (x in features) {
+                        var properties = features[x].getProperties();
+                        var id = properties.id;
+                        if (id == selectedFeatureID) {
+                            $("#legend").show();
+                            $("#percentageTB").show();
+                            var cellPercentege = document.getElementById("percentageTB").rows.namedItem("contentRow").cells;
+                            cellPercentege[0].innerHTML = selectedFeatureID;
+                            cellPercentege[1].innerHTML = row.cells[3].innerHTML;
+                            cellPercentege[2].innerHTML = treePercent[selectedFeatureID];
+                            cellPercentege[3].innerHTML = buildingPercent[selectedFeatureID];
+                            var imgstr = '../SynthesisProject/Plots/' + userID + '_' + 'point' + id + '.png';
+                            document.getElementById("SVFimage").innerHTML = '<img id="plotimg" src="'+ imgstr +'"/>';
+                            break;
+                        }
+                    }  
+                }
+            }
+        });
+      };
+
+    // Function on Removing a Building from Map Canvas
+    var removebuild = function () {
+        map.on('click', function(evt) {
+            if (stopremovevar == true) {
+                return;
+            };
+            // Get building feature by clicking on map canvas
+            coord = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:28992')
+            var url = polylayer.getSource().getGetFeatureInfoUrl(
+                coord, viewResolution, 'EPSG:28992',
+            {'INFO_FORMAT': 'application/json'});
+            // Construct polygon to be sent as JSON request
+            if (url) {
+                var parser = new ol.format.GeoJSON();
+                $.ajax({
+                    url: url,
+                    dataType: 'json',
+                    jsonpCallback: 'parseResponse'
+                }).then(function(response) {
+                    var build_id = (response['features']['0']['properties']['identificatie'])
+					var type = (response['features']['0']['geometry']['type']);
+					if (type == "MultiPolygon") {
+						var polygon = (response['features']['0']['geometry']['coordinates']['0']['0'])
+					} else if (type == "Polygon") {
+						var polygon = (response['features']['0']['geometry']['coordinates']['0'])
+					}
+                    var geometry = (response['features']['0']['geometry']['coordinates']['0'])
+                    databuild.push({key: bcnt, value: [polygon, build_id]});
+					
+                    polyCor = [];
+                    polygon.forEach(function(geomCor){
+                        polyCor.push(ol.proj.transform(geomCor, 'EPSG:28992', 'EPSG:3857'))
+                    })
+                    // Style deleted building with red color
+                    var style = new ol.style.Style({
+                        stroke: new ol.style.Stroke({color: 'grey', width: 1}),
+                        fill: new ol.style.Fill({color: '#ff6666'})
+                    })
+                    // Define new polygon feature
+                    var feature = new ol.Feature({
+                        geometry: new ol.geom.Polygon([polyCor]),
+                        id: bcnt,
+                    })
+                    bcnt = bcnt + 1;
+                    source1.addFeature(feature);
+                    feature.setStyle(style)
+                });
+            };
+        });
+    };
+             
+    // Function to add a new polygon
+    var addPoly = function () {
+        // Draw polygon on canvas
+        draw = new ol.interaction.Draw({
+            source: source2,
+            type: "Polygon"
+        });
+         
+        map.addInteraction(draw);
+        draw.on('drawend', function (event) {
+            // Set height of building
+            var height = window.prompt("Please enter the height for the building:","");
+            while (( height == "" || Number(height) <= 0 || Number(height) == 0 || isNaN(height)) && (height != null)) {
+                var height = prompt("The height is not valid! Please enter the height for the building:", "");
+            } 
+			if (Number(height) > 0){
+				var buildingHeight = Number(height);
+				addedPolyCor = event.feature.getGeometry().getCoordinates()['0'];
+				var coordLst = [];
+				addedPolyCor.forEach(function(addedPoly){
+					coordLst.push(ol.proj.transform(addedPoly, 'EPSG:3857', 'EPSG:28992'))
+				});
+				addedbuild.push({key: bcnt_p, value: [coordLst,buildingHeight]})
+				bcnt_p = bcnt_p+1;
+				console.log(addedbuild);
+				 
+				var styleadd = new ol.style.Style({
+					stroke: new ol.style.Stroke({color: 'grey', width: 1}),
+					fill: new ol.style.Fill({color: '#99e699'})
+				})
+				event.feature.setStyle(styleadd)
+				}
+			else{
+				var styleadd = new ol.style.Style({
+				stroke: new ol.style.Stroke({color: [255 , 255, 255, 0.0], width: 1}),
+				fill: new ol.style.Fill({color: [255 , 255, 255, 0.0]})
+				})
+				event.feature.setStyle(styleadd)
+				}
+			});
+        };
+     
+    // Function to undo all calculations performed and remove all results
+    var undo = function () {
+        flag = 0;
+        buildingPercent = {};
+        treePercent = {};
+        currentDate = new Date();
+        userID = currentDate.getTime();
+        deleted = 0;
+        currentDate = new Date();
+        userID = currentDate.getTime();
+        document.getElementById("SVFimage").innerHTML = "";
+        $("#legend").hide();
+        $("#percentageTB").hide();
+        var table = document.getElementById("myTable");
+        var rows = table.getElementsByTagName("tr");
+        for(i = 1; i < rows.length; i++){
+            var currentRow = table.rows[i];
+            currentRow.deleteCell(3)
+        }
+    }
+    // Function that resets everything
+    var clearCanvas = function(){
+        flag = 0;
+        featureID = 0;
+        selectedFeatureID = 0;
+        removeNum = 0;
+        buildingPercent = {};
+        treePercent = {};
+        currentDate = new Date();
+        userID = currentDate.getTime();
+        deleted = 0;
+        currentDate = new Date();
+        userID = currentDate.getTime();
+        stopremovevar = true;
+        stopselectvar = true;
+        databuild = [{"key":"0"}];
+        addedbuild = [{"key":"0"}];
+        document.getElementById("SVFimage").innerHTML = "";
+        $("#legend").hide();
+        $("#percentageTB").hide();
+        var table = document.getElementById("myTable");
+        var rows = table.getElementsByTagName("tr");
+        while (rows.length > 1){
+            document.getElementById("myTable").deleteRow(1);
+        rows = table.getElementsByTagName("tr");}
+        var features = source.getFeatures();
+        features.forEach(function(feature){
+            source.removeFeature(feature);
+        })
+        var features = source1.getFeatures();
+        features.forEach(function(feature){
+            source1.removeFeature(feature);
+        })
+        var features = source2.getFeatures();
+        features.forEach(function(feature){
+            source2.removeFeature(feature);
+        })
+    }
+      
+    // Function that presents the SVF plot to the user
+    var showPlot = function (){  
+        var features = source.getFeatures();
+        if (features != null && features.length > 0) {
+            for (x in features) {
+                var properties = features[x].getProperties();
+                var id = properties.id;
+                if (id == selectedFeatureID) {
+                    var imgstr = '../SynthesisProject/Plots/' + userID + '_' + 'point' + id + '.png';
+                    document.getElementById("SVFimage").innerHTML = '<img id="plotimg" src="'+ imgstr +'"/>';
+                    break;
+                }
+            }  
+        }
+    }     
+    
+    // Function to delete selected existing point(s)
+    var remove = function () {
+        var features = source.getFeatures();
+        if (features != null && features.length > 0) {
+            for (x in features) {
+                var properties = features[x].getProperties();
+                var id = properties.id;
+                if (id == selectedFeatureID) {
+                    var cell = document.getElementById("myTable").rows[id].cells;
+                    cell[0].innerHTML = '';
+                    cell[1].innerHTML = '';
+                    cell[2].innerHTML = '';
+                    if (cell[3] !== undefined){
+                        cell[3].innerHTML = '';}
+                    if (flag > 0){removeNum = removeNum + 1;}
+                    source.removeFeature(features[x]);
+                    map.removeInteraction(singleClick);
+                    break;
+                }
+            }  
+        }
+      
+        stopselectvar = false;
+        stopremovevar = true;
+        map.removeInteraction(draw);
+        select();
+    }
+    
+    // Function that toggles the canvas from topographic map to aerial imagery
+    var togglelayer = function() {
+        if (baselayer.getVisible() == true) {
+            baselayer.setVisible(false);
+            satlayer.setVisible(true);
+            polylayer.setOpacity(0.5);
+        } else {
+            baselayer.setVisible(true);
+            satlayer.setVisible(false);
+            polylayer.setOpacity(1);        
+        }
+    };
+      
+    // Function to toggle polygon footprints on/off
+    var togglepolygons = function() {
+        if (polylayer.getVisible() == true) {
+            polylayer.setVisible(false);  
+        } else {
+            polylayer.setVisible(true);
+        }
+    };
+    
+    var togglezoom = function() {
+        var target = document.getElementById("togglezoom");
+        if (zoomselectvar == true) {
+            zoomselectvar = false;
+            target.style.opacity = "0.6";
+        } else {
+            zoomselectvar = true;
+            target.style.opacity = "1.0"
+        }
+    };
+
+    proj4.defs("EPSG:28992","+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.417,50.3319,465.552,-0.398957,0.343988,-1.8774,4.0725 +units=m +no_defs");
+    
+    // Function that constructs request
+    var sendData = function () {
+        var trackList = [];
+        var features = source.getFeatures();
+        var data = [{userID:userID}];
+        features.forEach(function(feature){
+            var properties = feature.getProperties();
+            var id = properties.id;
+            if (id > flag){
+                trackList.push(id)
+                var coord = feature.getGeometry().getCoordinates();
+                coord = ol.proj.transform(coord, 'EPSG:3857', 'EPSG:28992');
+                data.push({key: id, value: coord});
+            }
+        });
+        var requestData = [data, databuild, addedbuild];
+        // console.log(requestData)
+        $.ajax({ 
+            type: "POST", 
+            url: "responsePHP.php", 
+            data: {kvcArray : requestData},
+            beforeSend: function(){
+                // Show image container
+                $("#loader").show();
+                map.removeInteraction(draw);
+            },
+            success: function(data, textStatus) { 
+                var table = document.getElementById("myTable");
+                var cnt = 0;
+                var outputCnt = 0;
+                var SVFs = data.split("\n");
+                SVFs.forEach(function(svf){
+
+                    outputCnt = outputCnt + 1;
+                    if (outputCnt%3 == 1){
+                        var row = $('table#myTable tr#'+trackList[cnt]);
+                        row.append($("<td>"+svf.substring(0,5)+"</td>"));
+                    }
+
+                    else if (outputCnt%3 == 2) {
+                        treePercent[trackList[cnt]] = svf;
+                        //console.log(treePercent)
+                    }
+
+                    else if (outputCnt%3 == 0) {
+                        buildingPercent[trackList[cnt]] = svf;
+                        //console.log(buildingPercent)
+                        cnt = cnt + 1;
+                    }
+
+                });
+            },
+            complete:function(data){
+                // Hide image container
+                $("#loader").hide();
+                flag = featureID;
+                map.removeInteraction(singleClick);
+                addInteraction();
+            }
+        }); 
+
+    };
+      
+    // Function to enable user to download the point table in CSV format  
+    function exportTableToCSV($table, filename) {  
+        var $rows = $table.find('tr:has(td),tr:has(th)');
+        // Temporary delimiter characters unlikely to be typed by keyboard
+        // This is to avoid accidentally splitting the actual contents
+        tmpColDelim = String.fromCharCode(11), // vertical tab character
+        tmpRowDelim = String.fromCharCode(0), // null character
+        // actual delimiter characters for CSV format
+        colDelim = '","',
+        rowDelim = '"\r\n"',
+        
+        // Grab text from table into CSV formatted string
+        csv = '"' + $rows.map(function (i, row) {
+            var $row = $(row), $cols = $row.find('td,th');
+  
+            return $cols.map(function (j, col) {
+                var $col = $(col), text = $col.text();
+                return text.replace(/"/g, '""'); // escape double quotes
+            }).get().join(tmpColDelim);
+  
+        }).get().join(tmpRowDelim)
+        .split(tmpRowDelim).join(rowDelim)
+        .split(tmpColDelim).join(colDelim) + '"',
+        // Data URI
+        csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+        //console.log(csvData);
+        if (window.navigator.msSaveBlob) { // IE 10+
+            //alert('IE' + csv);
+            window.navigator.msSaveOrOpenBlob(new Blob([csv], {type: "text/plain;charset=utf-8;"}), "csvname.csv")
+        } 
+        else {
+            $(this).attr({ 'download': filename, 'href': csvData, 'target': '_blank' }); 
+        }
+    }
+      
+    // Button function to initiate CSV table download
+    $("#xx").on('click', function (event) {  
+        exportTableToCSV.apply(this, [$('#myTable'), 'export.csv']);  
+        // IF CSV, don't do event.preventDefault() or return false
+        // We actually need this to be a typical hyperlink
+    });
+    
+    // Function to import point coordinates
+    $('#submit-file').on("click",function(e){
+        $( "#files" ).trigger( "click" );
+        e.preventDefault();
+        $( "#files" ).change(function(){ $('#files').parse({
+            config: {
+                delimiter: "auto",
+                complete: displayHTMLTable,
+            },
+            before: function(file, inputElem){
+            //console.log("Parsing file...", file);
+            },
+            error: function(err, file){
+            //console.log("ERROR:", err, file);
+            },
+            complete: function(){
+            //console.log("Done with all files");
+            }
+        });});
+    });
+    
+    // Adds the points inputted from submited file into the coordinate table
+    function displayHTMLTable(results){
+        var table = document.getElementById("myTable");
+        var data = results.data;
+        for(i = 0;i < data.length;i++){
+            var row = data[i];
+            var cells = row.join(",").split(/,/);
+            for(j = 0;j < cells.length;j += 2){
+                var cellContent1 = parseFloat(cells[j]);
+                var cellContent2 = parseFloat(cells[j+1]);
+                if (!isNaN(cellContent1) && !isNaN(cellContent2)){
+                    featureID = featureID + 1;
+                    // Create point feature on map canvas
+                    var point_feature = new ol.Feature({ });
+                    var mapcoord = ol.proj.transform([cellContent1, cellContent2], 'EPSG:28992', 'EPSG:3857');
+                    var point_geom = new ol.geom.Point(
+                        [mapcoord[0],mapcoord[1]]
+                    );
+                    point_feature.setGeometry(point_geom);
+                    point_feature.setProperties({
+                       'id': featureID
+                    })
+                    source.addFeature(point_feature);
+                    point_feature.setStyle(styleFunction(featureID.toString())) 
+                    var trow = table.insertRow(featureID);
+                    trow.id = featureID;
+                    var cell1 = trow.insertCell(0);
+                    var cell2 = trow.insertCell(1);
+                    var cell3 = trow.insertCell(2);
+                    cell1.innerHTML = featureID;
+                    cell2.innerHTML = cellContent1.toFixed(3);;
+                    cell3.innerHTML = cellContent2.toFixed(3);;
+                }
+            }
+        }  
+    }
+        
+</script>
+<script>
+    //Used to toggle the menu on small screens when clicking on the menu button
+    function myFunction() {
+        var x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else { 
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+</script>
+</html>

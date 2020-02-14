@@ -1,0 +1,662 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+	<meta charset="UTF-8">
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<style type="text/css">
+
+		
+		
+		body {
+            margin: 1px;
+        }
+		
+        #map {
+			position: absolute;
+			top: 52px;
+            width: 1000px;
+            height: 500px;
+            border: 1px solid black;
+        }
+		
+		 #SVFimage{
+			position: absolute;
+			top: 50px;
+			left: 1010px;
+            width: 640px;
+            height: 480px;
+        }
+		#loader {
+			position: absolute;
+			top: 150px;
+			left: 300px;
+            width: 300px;
+            height: 300px;
+        }
+		
+		
+		
+		input, label, button {
+			position:relative;
+			top: 552px;
+		}
+		
+		table {
+			border: 2px solid black;
+			margin-top:5px;
+			position:relative;
+			top:552px;
+			text-align: center;
+			border-collapse: collapse
+		}
+		
+		th, td {
+			border: 1px solid black;
+		}
+		html {
+			display:block;
+			overflow:auto;
+		}
+		
+		a.export,
+		a.export:visited {
+			position: relative;
+			top:570px;
+		  display: inline-block;
+		  text-decoration: none;
+		  color: #000;
+		  background-color: #ddd;
+		  border: 1px solid #ccc;
+		  padding: 8px;
+		}
+    </style>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		/* Create two equal columns that floats next to each other */
+		.column {
+			float: left;
+			width: 50%;
+			padding: 10px;
+			height: 300px; /* Should be removed. Only for demonstration */
+		}
+
+		/* Clear floats after the columns */
+		.row:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+	</style>
+    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js"></script>
+	<script src="https://epsg.io/28992.js"></script>
+  <script src="papaparse.min.js"></script>
+  </head>
+  
+  <body>
+  <header>
+     	<div class="w3-top">
+		<div class="w3-bar w3-blue w3-card w3-left-align w3-large">
+			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-blue" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+			<a href="Home.html" class="w3-bar-item w3-button w3-padding-large w3-hover-white">Home</a>
+			<a href="SVF.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-white">Portal</a>
+			<a href="Tutorial.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Tutorial</a>
+			<a href="Documentation.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Documentation</a>
+		</div>
+		
+		<!-- Navbar on small screens -->
+		<div id="navDemo" class="w3-bar-block w3-light-blue w3-hide w3-hide-large w3-hide-medium w3-large">
+			<a href="SVF.html" class="w3-bar-item w3-button w3-padding-large">Portal</a>
+			<a href="Tutorial.html" class="w3-bar-item w3-button w3-padding-large">Tutorial</a>
+			<a href="Documentation.html" class="w3-bar-item w3-button w3-padding-large">Documentation</a>
+		</div>
+	</div>
+  </header>
+  <div class="row">
+
+  <div class="column">
+   <div id="SVFimage">
+   <div>
+  </div>
+</div>
+  <div class="column">
+	<div id="map" class="map"></div>
+	<!-- Image loader -->
+	<img id="loader" src="reload.gif" width='500px' height='500px' style='display: none;'>
+	<!-- Image loader -->
+
+ <div class="form-group">
+   <label for="files">Upload a CSV formatted file:</label>
+   <input type="file" id="files"  class="form-control" accept=".csv" required />
+ </div>
+ <div class="form-group">
+ <button type="submit" id="submit-file" class="btn btn-primary">Upload File</button>
+ </div>
+
+	<input type="radio" id="start" label="Draw Points"></input>
+	<label>Draw Points</label>
+	<input type="radio" id="stop"></input>
+	<label>Stop Drawing</label>
+	<input type="radio" id="select"></input>
+	<label>Select Point</label>
+	<button id='Toggle' onclick ="togglelayer()">Toggle background</button>
+	<button id='Toggle' onclick ="togglepolygons()">Toggle polygons</button>
+	<button id="delete" onclick="remove()">Delete selected point</button>
+	<button id="plot" onclick="showPlot()">Show plot</button>
+	<button id="clear">Clear canvas</button>
+	<button id="SVF" onclick="sendData()">Calculate SVF</button>
+	<table id="myTable">
+	  <tr>
+		<th>ID</th>
+		<th>X</th>
+		<th>Y</th>
+		<th>SVF</th>
+	  </tr>
+
+	</table>
+	<div id="response"></div>
+	<a href="#" id="xx" class="export">Export Table to Excel</a>
+	
+	
+    <script>
+		var source = new ol.source.Vector({wrapX: false});
+		var vectorLayer = new ol.layer.Vector({source: source});
+		var draw; // global so we can remove it later
+		var featureID = 0;
+		var singleClick;
+		var selectedFeatureID=0;
+		var ccord;
+		var flag=0;
+		var currentDate = new Date();
+		var userID = currentDate.getTime();
+		var deleted=0;
+		var selectedFeature;
+
+
+
+function styleFunction(description) {
+  return [
+		new ol.style.Style({
+			image: new ol.style.Circle({
+				fill: new ol.style.Fill({
+				  color: [180, 0, 0, 1]
+				}),
+				stroke: new ol.style.Stroke({
+					  color: [180, 0, 0, 1],
+					  width: 1
+					}),
+				radius: 7
+				}),
+			//fill: fill,
+			//stroke: stroke,
+			text: new ol.style.Text({
+				font: '14px Calibri,sans-serif',
+				fill: new ol.style.Fill({ color: '#000' }),
+				stroke: new ol.style.Stroke({
+				  color: '#fff', width: 1
+				}),
+				// get the text from the feature - `this` is ol.Feature
+				text: description
+				})
+		})
+				  ];
+				}	
+
+
+function styleFunctionSelect(description) {
+  return [
+		new ol.style.Style({
+			image: new ol.style.Circle({
+				fill: new ol.style.Fill({
+				  color: '#ffff00'
+				}),
+				stroke: new ol.style.Stroke({
+					  color: '#ffff00',
+					  width: 1
+					}),
+				radius: 7
+				}),
+			//fill: fill,
+			//stroke: stroke,
+			text: new ol.style.Text({
+				font: '14px Calibri,sans-serif',
+				fill: new ol.style.Fill({ color: '#000' }),
+				stroke: new ol.style.Stroke({
+				  color: '#fff', width: 1
+				}),
+				// get the text from the feature - `this` is ol.Feature
+				text: description
+				})
+		})
+				  ];
+				}			  
+				
+
+var baselayer = new ol.layer.Tile({
+			source: new ol.source.OSM()
+		});
+		baselayer.setVisible(true);
+
+		var satlayer = new ol.layer.Tile({
+			source: new ol.source.TileWMS({
+			url: 'https://geodata.nationaalgeoregister.nl/luchtfoto/rgb/wms',
+			params: {'LAYERS': 'Actueel_ortho25', 'FORMAT':'image/png'},
+			minZoom: 100,
+			maxZoom: 200
+			})
+		});
+		satlayer.setVisible(false);
+
+		var polylayer = new ol.layer.Tile({
+			source: new ol.source.TileWMS({
+			url: 'https://geodata.nationaalgeoregister.nl/bag/wms',
+			params: {'LAYERS': 'pand', 'FORMAT':'image/png'}
+			})
+		});
+
+
+		var boundarylayer = new ol.layer.Tile({
+			source: new ol.source.TileWMS({
+			url: 'https://geodata.nationaalgeoregister.nl/bestuurlijkegrenzen/wfs?&TYPENAME=bestuurlijkegrenzen:gemeenten&SRSNAME=EPSG:3857&cql_filter=(bestuurlijkegrenzen:code=%270518%27)',
+			params: {'LAYERS': 'gemeenten', 'FORMAT': 'image/png'}
+			})
+		});
+
+		var layers = [baselayer, satlayer, polylayer,boundarylayer, vectorLayer]
+
+		
+		
+		var centerLonLat = [4.373003, 52.0006821];
+		var centerWebMercator = ol.proj.fromLonLat(centerLonLat);
+		
+		var map = new ol.Map({
+			
+			layers: layers,
+			target: 'map',
+			view: new ol.View({
+			  center: centerWebMercator,
+			  zoom: 15
+			})
+		});
+		
+		//zoomslider = new ol.control.ZoomSlider();
+        //map.addControl(zoomslider);
+        //return map;
+		
+		$("input#start").on("click", function (event) {
+			$("input#stop").prop( "checked", false );
+			$("input#select").prop( "checked", false );
+			map.removeInteraction(singleClick);
+			addInteraction();
+		});
+		
+		$("input#stop").on("click", function (event) {
+			$("input#start").prop( "checked", false );
+			$("input#select").prop( "checked", false );
+			map.removeInteraction(singleClick);
+			map.removeInteraction(draw);
+		});
+		
+		$("input#select").on("click", function (event) {
+			$("input#start").prop( "checked", false );
+			$("input#stop").prop( "checked", false );
+			map.removeInteraction(draw);
+			
+
+			select();
+		});
+		
+		$('#myTable').on('click', 'tr', function(){
+				var table = document.getElementById("myTable");
+				var row = table.rows[selectedFeatureID];
+				if (selectedFeatureID !== 0){
+						selectedFeature.setStyle(styleFunction(selectedFeatureID.toString()));
+						row.style.backgroundColor='#ffffff'};
+				selectedFeatureID = $(this).index();
+				
+				var features = source.getFeatures();
+			if (features != null && features.length > 0) {
+				for (x in features) {
+					var properties = features[x].getProperties();
+					var id = properties.id;
+					if (id == selectedFeatureID) {
+						selectedFeature=features[x];
+						break;
+					}
+				}	
+			}
+
+				selectedFeature.setStyle(styleFunctionSelect(selectedFeatureID.toString()))
+		
+				row = table.rows[selectedFeatureID];
+				row.style.backgroundColor='#ffff00'
+				console.log(selectedFeatureID)
+});
+		
+        var addInteraction = function () {
+			draw = new ol.interaction.Draw({
+				source: source,
+				type: "Point"
+			});
+			
+			map.addInteraction(draw);
+			
+			draw.on('drawend', function (event) {
+				featureID = featureID + 1;
+				console.log(featureID)
+				var table = document.getElementById("myTable");
+				var row = table.insertRow(featureID);
+				row.id = featureID;
+				var cell1 = row.insertCell(0);
+				var cell2 = row.insertCell(1);
+				var cell3 = row.insertCell(2);
+				cell1.innerHTML = featureID;
+				var coords= ol.proj.transform(event.feature.getGeometry().getCoordinates(), 'EPSG:3857', 'EPSG:28992');
+				cell2.innerHTML = coords[0].toFixed(3);
+				cell3.innerHTML = coords[1].toFixed(3);
+				event.feature.setProperties({
+					'id': featureID
+				
+				})
+event.feature.setStyle(styleFunction(featureID.toString()))
+	}
+			)};
+		
+		var select = function () {
+			singleClick = new ol.interaction.Select();
+			map.addInteraction(singleClick);
+			
+			singleClick.getFeatures().on('add', function(event){
+				var properties = event.element.getProperties();
+				var table = document.getElementById("myTable");
+				var row = table.rows[selectedFeatureID];
+				if (selectedFeatureID !== 0){
+						selectedFeature.setStyle(styleFunction(selectedFeatureID.toString()));
+						row.style.backgroundColor='#ffffff'};
+				selectedFeatureID = properties.id;
+				selectedFeature=event.element;
+
+				selectedFeature.setStyle(styleFunctionSelect(selectedFeatureID.toString()))
+				row = table.rows[selectedFeatureID];
+				row.style.backgroundColor='#ffff00'
+				console.log(selectedFeatureID)}
+			);
+		};
+		
+		function addRowHandlers() {
+    var table = document.getElementById("myTable");
+    var rows = table.getElementsByTagName("tr");
+    for (i = 0; i < rows.length; i++) {
+        var currentRow = table.rows[i];
+        var createClickHandler = 
+            function(row) 
+            {
+                return function() { 
+                                        var cell = row.getElementsByTagName("td")[0];
+                                        var id = cell.innerHTML;
+                                        alert("id:" + id);
+                                 };
+            };
+
+        currentRow.onclick = createClickHandler(currentRow);
+    }
+}
+window.onload = addRowHandlers();
+
+		
+		var showPlot=function (){
+		    var features = source.getFeatures();
+			if (features != null && features.length > 0) {
+				for (x in features) {
+					var properties = features[x].getProperties();
+					var id = properties.id;
+					if (id == selectedFeatureID) {
+						var imgstr = '../SynthesisProject/Plots/' + userID + '_' + 'point' + id + '.png';
+						document.getElementById("SVFimage").innerHTML = '<img id="plotimg" src="'+ imgstr +'" align=middle />';
+						break;
+					}
+				}	
+			}
+		}		
+		
+		var remove = function () {
+		    var features = source.getFeatures();
+			if (features != null && features.length > 0) {
+				for (x in features) {
+					var properties = features[x].getProperties();
+					var id = properties.id;
+					if (id == selectedFeatureID) {
+						var cell = document.getElementById("myTable").rows[id].cells;
+						cell[0].innerHTML='';
+						cell[1].innerHTML='';
+						cell[2].innerHTML='';
+						cell[3].innerHTML='';
+						source.removeFeature(features[x]);
+						map.removeInteraction(singleClick);
+						
+						break;
+					}
+				}	
+			}
+
+			$("input#start").prop( "checked", false );
+			$("input#stop").prop( "checked", false );
+			map.removeInteraction(draw);
+			select();
+		}
+		
+		var togglelayer = function() {
+			if (baselayer.getVisible() == true) {
+				baselayer.setVisible(false);
+				satlayer.setVisible(true);	
+			} else {
+				baselayer.setVisible(true);
+				satlayer.setVisible(false);
+			}
+		};
+
+		var togglepolygons = function() {
+			if (polylayer.getVisible() == true) {
+				polylayer.setVisible(false);	
+			} else {
+				polylayer.setVisible(true);
+			}
+		};
+		
+		proj4.defs("EPSG:28992","+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.417,50.3319,465.552,-0.398957,0.343988,-1.8774,4.0725 +units=m +no_defs");
+		var sendData = function () {
+			var flagprime=1;
+			var features = source.getFeatures();
+			var data = [{userID:userID}];
+			features.forEach(function(feature) {
+				if (flagprime>flag){
+				flagprime = flagprime + 1;
+				var coord = feature.getGeometry().getCoordinates();
+				coord = ol.proj.transform(coord, 'EPSG:3857', 'EPSG:28992');
+				var properties = feature.getProperties();
+				var id = properties.id;
+				data.push({key: id, value: coord});}
+				else{flagprime = flagprime + 1;}
+			});
+			
+$.ajax({ 
+       type: "POST", 
+       url: "responsePHP.php", 
+       data: {kvcArray : data},
+		beforeSend: function(){
+		// Show image container
+		$("#loader").show();
+	   map.removeInteraction(draw);},
+       success: function(data, textStatus) { 
+				var table = document.getElementById("myTable");
+				var leng = table.rows.length;
+				//var checkrow= table.rows[cnt].cells;
+				var cnt=flag;
+				
+				var SVFs=data.split("\n");
+				SVFs.forEach(function(svf){
+					cnt=cnt+1;
+					var length = table.rows.length;
+					if (length > 0 && cnt < length) {
+						var check = table.rows[cnt].cells[0].innerHTML;
+						while (check == '') {
+							cnt+=1
+							if (cnt >= length) {
+								break;
+							}
+							check = table.rows[cnt].cells[0].innerHTML;
+						}
+					}
+					var row = $('table#myTable tr#'+cnt);
+					row.append($("<td>"+svf.substring(0,5)+"</td>"))
+				});
+        },
+		   complete:function(data){
+			// Hide image container
+			$("#loader").hide();
+			flag=flagprime-1;
+			map.removeInteraction(singleClick);
+			addInteraction();
+   }
+}); 
+
+ };
+ 
+ function exportTableToCSV($table, filename) {
+
+    var $rows = $table.find('tr:has(td),tr:has(th)');
+		console.log($rows);
+
+        // Temporary delimiter characters unlikely to be typed by keyboard
+        // This is to avoid accidentally splitting the actual contents
+        tmpColDelim = String.fromCharCode(11), // vertical tab character
+        tmpRowDelim = String.fromCharCode(0), // null character
+
+        // actual delimiter characters for CSV format
+        colDelim = '","',
+        rowDelim = '"\r\n"',
+
+        // Grab text from table into CSV formatted string
+        csv = '"' + $rows.map(function (i, row) {
+            var $row = $(row), $cols = $row.find('td,th');
+
+            return $cols.map(function (j, col) {
+                var $col = $(col), text = $col.text();
+
+                return text.replace(/"/g, '""'); // escape double quotes
+
+            }).get().join(tmpColDelim);
+
+        }).get().join(tmpRowDelim)
+            .split(tmpRowDelim).join(rowDelim)
+            .split(tmpColDelim).join(colDelim) + '"',
+
+
+
+        // Data URI
+        csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+
+        console.log(csv);
+
+        if (window.navigator.msSaveBlob) { // IE 10+
+            //alert('IE' + csv);
+            window.navigator.msSaveOrOpenBlob(new Blob([csv], {type: "text/plain;charset=utf-8;"}), "csvname.csv")
+        } 
+        else {
+            $(this).attr({ 'download': filename, 'href': csvData, 'target': '_blank' }); 
+        }
+}
+
+// This must be a hyperlink
+$("#xx").on('click', function (event) {
+
+    exportTableToCSV.apply(this, [$('#myTable'), 'export.csv']);
+
+    // IF CSV, don't do event.preventDefault() or return false
+    // We actually need this to be a typical hyperlink
+});
+
+$('#submit-file').on("click",function(e){
+	e.preventDefault();
+	$('#files').parse({
+		config: {
+			delimiter: "auto",
+			complete: displayHTMLTable,
+		},
+		before: function(file, inputElem)
+		{
+			//console.log("Parsing file...", file);
+		},
+		error: function(err, file)
+		{
+			//console.log("ERROR:", err, file);
+		},
+		complete: function()
+		{
+			//console.log("Done with all files");
+		}
+	});
+});
+
+function displayHTMLTable(results){
+	//var table = '<table id="myTable"><tr><th>ID</th><th>X</th><th>Y</th><th>SVF</th></tr>';
+	var table = document.getElementById("myTable");
+	var data = results.data;
+	for(i=0;i<data.length;i++){
+		var row = data[i];
+		var cells = row.join(",").split(/,/);
+		for(j=0;j<cells.length;j+=2){
+		var cellContent1=parseFloat(cells[j]);
+		var cellContent2=parseFloat(cells[j+1]);
+		if (!isNaN(cellContent1) && !isNaN(cellContent2)){
+			featureID=featureID+1;
+			var point_feature = new ol.Feature({ });
+			var point_geom = new ol.geom.Point(
+			  [cellContent1, cellContent2]
+			);
+			point_feature.setGeometry(point_geom);
+			point_feature.setProperties({
+					'id': featureID
+				})
+				
+				source.addFeature(point_feature);
+				point_feature.setStyle(styleFunction(featureID.toString()))
+			
+			var trow = table.insertRow(featureID);
+			trow.id = featureID;
+			var cell1 = trow.insertCell(0);
+			var cell2 = trow.insertCell(1);
+			var cell3 = trow.insertCell(2);
+			cell1.innerHTML = featureID;
+			cell2.innerHTML = cellContent1.toFixed(3);;
+			cell3.innerHTML = cellContent2.toFixed(3);;
+
+			}
+		}
+	}
+
+}
+    </script>
+		<script>
+	//Used to toggle the menu on small screens when clicking on the menu button
+	function myFunction() {
+			var x = document.getElementById("navDemo");
+			if (x.className.indexOf("w3-show") == -1) {
+				x.className += " w3-show";
+			} else { 
+				x.className = x.className.replace(" w3-show", "");
+			}
+		}
+	</script>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<title>Tutorial - Urban Horizon</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<link rel="icon" type="image/ico" href="Images/favicon.ico"> 
+
+<style>
+	body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+	.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+	.fa-anchor,.fa-coffee,.fa-info-circle,.fa-users, .fa-briefcase, .fa-at, .fa-envelope {font-size:200px
+	}
+
+	h3 {
+		padding-top: 50px;
+	}
+
+	h5 {
+		text-align: justify;
+	}
+	
+	td, th {
+	    text-align:left;
+	}
+	
+	.CCdisclaimer {
+		position:relative;
+		
+	    text-align: right;
+	    color: black;
+	    font-style: italic;
+	}
+
+     #CC-CC, #CC-BY, #CC-NC {
+		text-decoration: none;
+		color: white;
+     }
+
+  table {
+    border: 1px;
+    border-style: solid;
+    border-color: #ffffff;
+    border-collapse: collapse;
+    color: #000000;
+  }
+
+  td {
+    border: 1px;
+    border-style: solid;
+    border-color: #ffffff;
+    background-color: #9fd0f9;
+    padding: 5px;
+
+  }
+
+  th {
+    border: 1px;
+    border-style: solid;
+    border-color: #ffffff;
+    background-color: #2196F3;
+    color: #ffffff;
+    padding: 5px;
+  }
+  #navcell {
+    background-color: #2196F3;
+    color: #ffffff;
+  }
+  #buttoncell, #label {
+    text-align: center;
+  }
+
+  #toggle {
+  	text-align: center;
+  	/*padding: 0px 0px;*/
+  }
+
+  button {
+    position:relative;
+    height: 30px;
+    width:25px;
+    background-color: #2196F3;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  button:hover, a.fa:hover {
+    background-color: #085391;
+  }
+
+	html {
+		display:block;
+		overflow:auto;
+	}
+
+.sidenav {
+    height: 100%;
+    width: 160px; 
+    position: fixed; 
+    z-index: 0; 
+    top: 51px;
+    left: 0;
+    background-color: #9fd0f9;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+#introduction, #overview, #definitions, #specialcases, #footer {
+  position: relative;
+  left: 160px;
+  width: calc(100% - 160px);
+}
+
+#importexportimg {
+	border: 1px solid #000000;
+}
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: 	#666666;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #ffffff;
+}
+
+
+.main {
+    margin-left: 160px; 
+    padding: 0px 10px;
+}
+
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+#footer {
+	background-color: #666666;
+	text-align: center;
+	padding: 2px 0px;
+	color: #ffffff;
+}
+
+#subtext {
+	font-size: 14px;
+	margin-left: 15px;
+}
+
+#sidenote {
+  color: grey;
+}
+
+</style>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-blue w3-card w3-left-align w3-large" class="scrollmenu">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-blue" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="Home.html" class="w3-bar-item w3-button w3-padding-large w3-hover-white">Home</a>
+    <a href="SVF.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Application</a>
+    <a href="Tutorial.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-white">Tutorial</a>
+    <a href="Documentation.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Documentation</a>
+  </div>
+  
+    <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-light-blue w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="SVF.html" class="w3-bar-item w3-button w3-padding-large">Application</a>
+    <a href="Tutorial.html" class="w3-bar-item w3-button w3-padding-large">Tutorial</a>
+    <a href="Documentation.html" class="w3-bar-item w3-button w3-padding-large">Documentation</a>
+	</div>
+</div>
+
+<!-- Side navigation -->
+<div class="sidenav">
+	<a href="#introduction">Introduction</a>
+  	<a href="#overview">Overview</a>
+  	<a href="#definitions">Definitions</a>
+		<a id="subtext" href="#navigation">1. Navigation bar</a>
+		<a id="subtext" href="#importexport">2. Import/Export options</a>
+		<a id="subtext" href="#toolbar">3. Toolbar</a>
+		<a id="subtext" href="#inputtable">4. Input table</a>
+		<a id="subtext" href="#mapcanvas">5. Map canvas</a>
+		<a id="subtext" href="#maplayer">6. Map layer options</a>
+		<a id="subtext" href="#apparea">7. Working-area of the application</a>
+		<a id="subtext" href="#output">8. Room for output</a>
+   	<a href="#specialcases">Special cases</a>
+</div>
+
+<!-- First Grid -->
+<div id="introduction" class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+      <h1>Introduction</h1>
+      <h5 class="w3-padding-32">This page is set up in order to get you familiar with the Sky View Factor Web Application. It describes all functions that are available on the application page. If you're looking for a detailed description on underlying methodology, you should check the Documentation page.</h5>
+    </div>
+
+    <div class="w3-quarter w3-center">
+      <i class="w3-padding-64 w3-text-blue"></i>
+    </div>
+  </div>
+</div>
+
+<!-- Second Grid -->
+<div id="overview" class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+	<div class="w3-content">
+		<div clas="w3-threequarter">
+	      <h1>Overview</h1>
+	      <img id="overview2" src="Images/Overview.png" width="100%"/>
+	      <h5 class="">A short description of all the element-groups that are displayed in the image above, further explanation for each element can be found in the next chapter. Every list-item is clickable and refers to the corresponding chapter.</h5>
+	  	</div>
+	</div>
+</div>
+
+<!-- <div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
+    <h1 class="w3-margin w3-xlarge">text</h1>
+</div>
+ -->
+<!-- Third Grid -->
+<div id="definitions" class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div class="w3-threequarter">
+      <h1>Definitions</h1>
+      <h5>The following chapters describe all functionalities that are present on the web application. </h5>
+      <h3 id="navigation">1. Navigation bar</h3>
+      <table id="navbar">
+        <tr>
+            <th>Button</th>
+            <th>Function</th>
+        </tr>
+        <tr>
+            <td id="navcell"><a class="w3-bar-item w3-button w3-hover-white">Home</a></td>
+            <td id="cell">Navigates you to the homepage. Information about the project, the group behind this project and contact information can be found here.</td>
+        </tr>
+          <tr>
+            <td id="navcell"><a class="w3-bar-item w3-button w3-hide-small w3-hover-white">Application</a></td>
+            <td id="cell">Navigates you to the Sky View Factor application.</td>
+        </tr>
+          <tr>
+            <td id="navcell"><a class="w3-bar-item w3-button w3-hide-small w3-hover-white">Tutorial</a></td>
+            <td id="cell">Navigates you to the tutorial, this page. Information about how to use the web application and website in general can be found here.</td>
+        </tr>
+          <tr>
+            <td id="navcell"> <a class="w3-bar-item w3-button w3-hide-small w3-hover-white">Documentation</a></td>
+            <td id="cell">Navigates you to the documentation. On this page documentation can be found on the processes that are required to create this application.</td>
+        </tr>
+      </table>
+
+      <h3 id="importexport">2. Import/Export options</h3>
+      <table id="navbar">
+        <tr>
+            <th>Button</th>
+            <th>Function</th>
+        </tr>
+        <tr>
+            <td id="buttoncell"><button class="fa fa-upload" title="Upload Points"></button></td>
+            <td id="cell">Gives you the option to upload a CSV-file containing the coordinates of the points you would like to calculate the SVF value of.</td>
+        </tr>
+          <tr>
+            <td id="buttoncell"><button class="fa fa-download" title="Export Table to Excel"></button></td>
+            <td id="cell">Lets you download a CSV-file containing the point IDs, coordinates of these points and their respective SVF values.</td>
+        </tr>
+      </table>
+      <h5 id="importexport"> In order to upload points to the application, they need to be in the CSV (Comma-Separated Values) file format. This file will need the headers X and Y on the first line and their respective values on the following rows. An example of how this would look in the open source text editor Notepad++ is shown in the figure below.</h5>
+
+      <img id="importexportimg" src="Images/CSV-Example.png"/>
+      <h5 id="importexport"/>
+      <a id="importexport" href="Downloads/Points.csv"> You can download an example by clicking on this link</a>
+      <h6 id="sidenote">*Please note that some versions of Excel don't properly load this file.</h6>
+      <h3 id="toolbar">3. Toolbar</h3>
+      <table id="navbar">
+        <tr>
+            <th>Button</th>
+            <th>Function</th>
+        </tr>
+        <tr>
+            <td id="buttoncell"><button class="fas fa-pencil-alt" title="Draw Points"></button></td>
+            <td id="cell">Enables the draw-points function. With this button you can draw points on the canvas, these points and their coordinates will be stored in the table on the left of the screen.</td>
+        </tr>
+          <tr>
+            <td id="buttoncell"><button class="fas fa-ban" title="Stop Drawing"></button></td>
+            <td id="cell">Disables the draw-points function. After clicking on this button you can freely click on the map without creating unwanted points.</td>
+        </tr>
+          <tr>
+            <td id="buttoncell"><button class="fas fa-mouse-pointer" title="Select Point"></button></td>
+            <td id="cell">Enables the select-points function. This button lets you select drawn points on the map. If the calculation of the SVF has been done, selecting a point on the canvas will result in the SVF-plot becoming visible on the right side of your screen.</td>
+        </tr>
+          <tr>
+            <td id="buttoncell"><button class="fas fa-times" title="Delete Selected Point"></button></td>
+            <td id="cell">Enables the delete-point function. This button lets you delete a selected point on the map. </td>
+        </tr>
+                  <tr>
+            <td id="buttoncell"><button class="far fa-eye-slash" title="Ignore Building"></button></td>
+            <td id="cell">Enables the ignore-building function. This button lets you remove a building from the SVF calculation process. This can be useful when a user desires to see the effects of e.g. demolishing a certain building has on the SVF of a given location.</td>
+        </tr>
+                  <tr>
+            <td id="buttoncell"><button class="fas fa-plus" title="Add New Building"></button></td>
+            <td id="cell">Enables the create-building function. This button lets you draw a building to the map canvas. After you're finished drawing a building (by connecting the end-point to the start-point of your drawing), a pop-up shows requesting the height of the building.</td>
+        </tr>
+                  <tr>
+            <td id="buttoncell"><button class="fas fa-undo" title="Undo Calculation"></button></td>
+            <td id="cell">Enables the undo-calculation function. This button lets the user clear all calculations, so that these can be done again under e.g. different cirucumstances. This can be useful in detecting differences in SVF values before and after adding or ignoring a building.</td>
+        </tr>
+                  <tr>
+            <td id="buttoncell"><button class="fas fa-eraser " title="Clear Canvas"></button></td>
+            <td id="cell">Enables the clear-canvas function. This button lets the user clear everything from the canvas and the tables. It is a quick method of restarting your session.</td>
+        </tr>
+        <tr>
+            <td id="buttoncell"><button class="fas fa-calculator " title="Calculate SVF" ></button></td>
+            <td id="cell">Enables the calculation function. When all inputs have been determined, this button will start the actual calculation of the SVFs and their corresponding plots.</td>
+        </tr>
+      </table>
+
+      <h3 id="inputtable">4. Input table</h3>
+      <table id="navbar">
+        <tr>
+            <th>Label</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <th id="label">ID</th>
+            <td id="cell">Refers to the ID of the drawn point. This starts at 1 and counts up after adding more points.</td>
+        </tr>
+          <tr>
+            <th id="label">X</th>
+            <td id="cell">Refers to the x-coordinate of the drawn point. This is displayed in the Dutch coordinate system (CRS) "EPSG:28992".</td>
+        </tr>
+          <tr>
+            <th id="label">Y</th>
+            <td id="cell">Refers to the y-coordinate of the drawn point. This is displayed in the Dutch coordinate system (CRS) "EPSG:28992".</td>
+        </tr>
+          <tr>
+            <th id="label">SVF</th>
+            <td id="cell">The calculated Sky View Factor is displayed here after calculation.</td>
+        </tr>
+      </table>
+
+      <h3 id="mapcanvas">5. Map canvas</h3>
+      	<h5> The map canvas is the working area of the application. Within the borders of this canvas the user can use the tools in the toolbar. </h5>
+
+      <h3 id="maplayer">6. Map layer options</h3>      
+        <table id="navbar">
+        <tr>
+            <th>Button</th>
+            <th>Function</th>
+        </tr>
+        <tr>
+            <td id="buttoncell"><button class="fas fa-map" title="Toggle Background"></button></td>
+            <td id="cell">Gives you the option to change the background layer. The default background layer is the Open Streetmap baselayer. The alternative background layer is an aerial imagery map from PDOK.</td>
+        </tr>
+          <tr>
+            <td id="buttoncell"><button class="fas fa-home" title="Toggle Building Footprints"></button></td>
+            <td id="cell">Gives you the option to turn the footprints layer from PDOK on or off. For the aerial imagery background this might prove useful, as the footprints can misalign with the imagery.</td>
+        </tr>
+       	<tr>
+	        <td id="buttoncell"><button id='togglezoom' class="fas fa-crosshairs" title="Toggle Zoom on Selection"></button></td>
+	        <td id="cell">Gives you the option to turn off the zoom on selection option. When this setting is active, you automatically zoom to a point when you select it in the table. If the button is fully visible, this setting is active. When it is inactive, the button becomes transparent.</td>
+        </tr>
+      </table>
+      <h3 id="apparea">7. Working-area of the application</h3>
+      	<h5> The working-area of the application is, in this case, the municipality of The Hague. While it is possible to click and draw on the map outside of the municipality borders, it will not yield results. </h5>
+
+      <h3 id="output">8. Room for output</h3>
+      	<h5> In this area the output will be loaded after calculation. This will be in the form of a fish-eye plot combined with a legend and a table underneath it. Showing the meaning of the colors and the percentages of obstructions caused by either buildings or vegetation. </h5>
+    </div>
+
+    <div class="w3-quarter w3-center">
+      <i class="w3-padding-64 w3-text-blue"></i>
+    </div>
+  </div>
+</div>
+
+
+<!-- Fourth Grid -->
+<div id="specialcases" class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div class="w3-threequarter">
+      <h1>Special Cases</h1>
+        <h5 class="w3-padding-16">
+        When you click on a building, the script takes the average height in a 1 meter radius around the point of the selected building. With this height it will calculate the Sky View Factorm, as seen from the top of the building. This is done because it is fruitless to calculate a Sky View Factor from inside a building.</h5>
+
+        <h5 class="w3-padding-16">When you click nearby a building, on water, the script takes the average height of the building in the point' proximity. This is due to the fact that the water class has a very limited amount of points in the pointcloud data. Due to this, it is not possible to calculate the Sky View Factor on water nearby  buildings.</h5>
+
+        <h5 class="w3-padding-16">When you add your own building and afterwards try to calculate the Sky View Factor on top of this building, the application will calculate the Sky View Factor from within this building. This will likely be a near-zero value. This is because the height of the selected point is determined before the addition of the created building. </h5>
+
+        <h5 class="w3-padding-16">When calculating the Sky View Factor near powerlines or other infrastructure that is not classified as a building, it will return as vegetation in the fish eye plot that is created. This is due to the limited classifications that are available in the source-data, AHN3. There is no specific vegetation classification, so the script uses the 'unclassified' points for this. This is done because most of the points that are classified as 'unclassified' are actually vegetation.</h5>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer id="footer">  
+ <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+  <a id='CC-CC' class="fab fa-creative-commons w3-xlarge" href="http://creativecommons.org/licenses/by-nc/4.0/"></a>
+  <a id='CC-BY' class="fab fa-creative-commons-by w3-xlarge" href="http://creativecommons.org/licenses/by-nc/4.0/"></a>
+  <a id='CC-NC' class="fab fa-creative-commons-nc w3-xlarge" href="http://creativecommons.org/licenses/by-nc/4.0/"></a>
+ <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Skyview Calculation Web Application</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Urban Horizon Group</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.<br />
+</footer>
+
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+	function myFunction() {
+			var x = document.getElementById("navDemo");
+			if (x.className.indexOf("w3-show") == -1) {
+				x.className += " w3-show";
+			} else { 
+				x.className = x.className.replace(" w3-show", "");
+			}
+		}
+</script>
+
+</body>
+</html>

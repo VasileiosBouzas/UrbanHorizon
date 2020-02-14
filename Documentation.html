@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<title>Documentation - Urban Horizon</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<link rel="icon" type="image/ico" href="Images/favicon.ico"> 
+
+<style>
+	body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+	.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+	.fa-anchor,.fa-coffee,.fa-info-circle,.fa-users, .fa-briefcase, .fa-at, .fa-envelope {font-size:200px
+	}
+
+	h3 {
+		padding-top: 50px;
+	}
+
+  h5 {
+    text-align: justify;
+  }
+
+	td, th {
+	    text-align:left;
+	}
+	
+	.CCdisclaimer {
+		position:relative;
+		
+	    text-align: right;
+	    color: black;
+	    font-style: italic;
+	}
+
+  #CC-CC, #CC-BY, #CC-NC, #CC-SA {
+		position: relative;
+		text-decoration: none;
+		color: black;
+		margin-right: 5px;
+  }
+  
+  #CC-CC-f, #CC-BY-f, #CC-NC-f, #CC-SA-f {
+		text-decoration: none;
+		color: #ffffff;
+  }  
+
+  #clicklink {
+    text-decoration: none;
+    color:black;
+  }
+
+  #attrlink:hover {
+  	color: gray;
+  }
+
+  #clicklink:hover {
+    color: white;
+  }
+
+  table {
+    border: 1px;
+    border-collapse: collapse;
+    color: #000000;
+  }
+
+  th {
+  	width:100%;
+  }
+
+  td {
+    border: 1px;
+    width: 100%;
+  }
+
+  html {
+		display:block;
+		overflow:auto;
+	}
+
+.sidenav {
+    height: 100%;
+    width: 160px; 
+    position: fixed; 
+    z-index: 0; 
+    top: 51px;
+    left: 0;
+    background-color: #9fd0f9;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+#documentation, #resources, #methodology, #links, #footer, #webdev, #attribution {
+  position: relative;
+  left: 160px;
+  width: calc(100% - 160px);
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: 	#666666;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #ffffff;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+#footer {
+	background-color: #666666;
+	text-align: center;
+	padding: 2px 0px;
+	color: #ffffff;
+}
+
+#subtext {
+  font-size: 14px;
+  margin-left: 15px;
+}
+
+#pdokimg {
+  height: 350px;
+}
+
+#methodimg {
+  height: 250px;
+}
+
+#architectureimg {
+	height: 225px;
+}
+
+#domeimg, #circleGridimg, #fisheyeplotimg {
+  height: 200px;
+}
+
+#tudelftimg {
+	position: absolute;
+	top: 10px;
+	left: calc(75% - 160px);
+	height: 200px;
+}
+
+#lefthalf {
+  width: 60%;
+}
+
+.righthalf {
+  width:40%;
+  text-align: right;
+}
+
+.attrone {
+	width: 20%;
+}
+
+.attrtwo {
+	width: 15%;
+}
+
+.attrthree {
+	width: 50%;
+}
+
+
+.attrfour {
+	width: 25%;
+}
+
+#imgtitle{
+  color: #2196F3;
+  font-style: italic;
+}
+
+#imgsource {
+  color: grey;
+}
+
+
+</style>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-blue w3-card w3-left-align w3-large" class="scrollmenu">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-blue" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="Home.html" class="w3-bar-item w3-button w3-padding-large w3-hover-white">Home</a>
+    <a href="SVF.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Application</a>
+    <a href="Tutorial.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Tutorial</a>
+    <a href="Documentation.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-white">Documentation</a>
+  </div>
+  
+    <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-light-blue w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="SVF.html" class="w3-bar-item w3-button w3-padding-large">Application</a>
+    <a href="Tutorial.html" class="w3-bar-item w3-button w3-padding-large">Tutorial</a>
+    <a href="Documentation.html" class="w3-bar-item w3-button w3-padding-large">Documentation</a>
+	</div>
+</div>
+
+<!-- Side navigation -->
+<div class="sidenav">
+    <a href="#documentation">Introduction</a>
+    <a href="#resources">Resources</a>
+    <a href="#methodology">Methodology</a>
+    <a id="subtext" href="#sphericaldome">1. 3D Spherical Dome</a>
+    <a id="subtext" href="#populatingdome">2. Populating the Dome</a>
+    <a id="subtext" href="#projectingdome">3. Projecting the Dome</a>
+    <a id="subtext" href="#fisheyeplot">4. Fisheye Plot</a>
+    <a href="#webdev">Web Development</a>
+    <a href="#attribution">Attribution</a>    
+    <a href="#links">Download Links</a>
+</div>
+
+<!-- First Grid -->
+<div id="documentation" class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+      <h1>Introduction</h1><img id="tudelftimg" src="Images/tudelft.png"></img>
+      <h5 class="w3-padding-32">This page presents a concise summary about the underlying methodologies behind this web application and it provides links to extended reports, as well as access to the team’s created programming language scripts.<br><br>
+      The purpose of this web application is to calculate the Sky View Factor for any location inside the municipality borders of The Hague. Additionally, several functions are implemented that let the user interact with the map canvas of the area, and provide a fisheye plot as an end result.<br><br>
+      Our implementation utilizes an adapted version “3D Point Cloud methodology” based on research made
+      by An et al. (2014).<br><br>
+      For more in-depth insight, we refer you to either the executive summary or the full report, both are available in the Download Links section.</h5>
+  </div>
+</div>
+
+<!-- Second Grid -->
+<div id="resources" class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+	<div class="w3-content">
+	      <h1>Resources</h1>
+        <table>
+          <tr>
+            <td id="lefthalf"></td>
+            <td id="imgtitle" class="righthalf">AHN3 tiles from PDOK</td>
+          </tr>
+          <tr>
+              <td id="lefthalf"><h5>The point cloud is retrieved from the 'Publieke Dienst op de Kaart', also known as PDOK, the national Dutch portal for a large number of spatial datasets. For this project the point cloud AHN3 is used, which is currently the most recently captured point cloud data in the Netherlands.<br><br>
+              The point cloud is split into and stored in smaller tiles. This preprocess is executed by our own open-source programming algorithm, based on Python and several of it's open-source libraries. This script is available for download in the Download Links section.<br><br>
+              The point cloud data that PDOK provides, is available in the LAZ (compressed) file format, while our algorithm demands files of the LAS (decompressed) format. In order to convert these files, we use LASzip, a link to LASzip is also available in the Download Links section.</h5></h5></td>
+              <td class="righthalf"><img id="pdokimg" src="Images/pdokimg.png"></img></td>
+          </tr>
+          <tr>
+            <td id="lefthalf"></td>
+            <td id="imgsource" class="righthalf">Source: https://www.pdok.nl</td>
+          </tr>
+
+        </table>
+	</div>
+</div>
+
+<!-- Third Grid -->
+<div id="methodology" class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+      <h1>Methodology</h1>
+      <h3 id="sphericaldome">1. 3D Spherical Dome</h3>
+      <table>
+        <tr>
+          <td id="lefthalf"></td>
+          <td id="imgtitle" class="righthalf">3D Dome Model</td>
+        </tr>
+        <tr>
+            <td id="lefthalf"><h5>A 3D hemispherical dome is created around a given location for which SVF needs to be estimated. This dome has a grid-like structure, separated into spherical sectors. For the purposes of this application, it is designed with an 100-meter radius and a resolution of 2 degrees horizontally and 1 degree vertically (totalling over 16 thousand sectors to be accounted). The image on the right shows an example of such a hemisphere, using less total sectors for visualization purposes.</h5></td>
+            <td class="righthalf"><img id="domeimg" src="Images/dome.png"></img></td>
+        </tr>
+        <tr>
+          <td id="lefthalf"></td>
+          <td id="imgsource" class="righthalf">Source: Bourke P. (2001)</td>
+        </tr>
+      </table>
+
+      <h3 id="populatingdome">2. Populating the Dome</h3>
+      <table>
+        <tr>
+          <td id="lefthalf"></td>
+          <td id="imgtitle" class="righthalf">Populating the Dome Grid</td>
+        </tr>
+        <tr>
+            <td id="lefthalf"><h5>The sectors of the dome are populated, based on whether the point cloud’s
+            points are projected through a ray to a corresponding sector of the dome grid. Within the urban environment, vegetation and buildings are considered as the main obstructions. For vegetation, a sector is defined as obstructed if even only one point lies within it.<br><br> For buildings, this is also the case, but an additional rule has been made: every sector below an obstructed one is also marked as obstructed. This is done because buildings are usually built straight up from the ground, however exceptions exist. By doing this, we guarantee buildings to be properly displayed as solids, since point cloud data often has incomplete facades of structures.</h5></td>
+            <td class="righthalf"><img id="methodimg" src="Images/svf_cal.png"></img></td>
+        </tr>
+        <tr>
+          <td id="lefthalf"></td>
+          <td id="imgsource" class="righthalf">Source: An et al. (2014)</td>
+        </tr>
+      </table>
+
+      <h3 id="projectingdome">3. Projecting the Dome</h3>
+      <table>
+        <tr>
+          <td id="lefthalf"></td>
+          <td id="imgtitle" class="righthalf">Circular Grid Model</td>
+        </tr>
+        <tr>
+            <td id="lefthalf"><h5>Project the dome grid into two dimensions by means of orthogonal projection. By doing this the dome is turned into a circular grid. Every sector of the grid can be referred to by a set of two numbers: its azimuth (its position in the horizontal direction relative to the north) and elevation (its position in the vertical direction relative to the zenith). In the same way, its projected point can be also related to a sector by its own azimuth and elevation values.</h5></td>
+            <td class="righthalf"><img id="circleGridimg" src="Images/medium.gif"></img></td>
+        </tr>
+        <tr>
+          <td id="lefthalf"></td>
+          <td id="imgsource" class="righthalf">Source: Bourke P. (2001)</td>
+        </tr>
+      </table>
+
+      <h3 id="fisheyeplot">4. Fish eye plot</h3>
+      <table>
+        <tr>
+          <td id="lefthalf"></td>
+          <td id="imgtitle" class="righthalf">Fisheye View Plot</td>
+        </tr>
+        <tr>
+            <td id="lefthalf"><h5>The populated 2-Dimensional grid is then stylized through an algorithm which is based on matplotlib, a library for Python. The produced result is a multi-colored image resembling a fisheye plot. Obstructions caused by uildings are coloured grey and obstructions caused by vegetation are coloured green. Any unobstructed sector is coloured blue. The image on the right displays such a plot, it may also be noted that the closest obstruction is the one that is displayed in the plot. </h5></td>
+            <td class="righthalf"><img id="fisheyeplotimg" src="Images/plot.png"></img></td>
+        </tr>
+        <tr>
+          <td id="lefthalf"></td>
+          <td id="imgsource" class="righthalf">Source: Own Work</td>
+        </tr>
+      </table>
+
+  </div>
+</div>
+
+<!-- Fourth Grid -->
+<div id="webdev" class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+  <div class="w3-content">
+      <h1>Web Development</h1>
+      <table>
+        <tr>
+          <td id="lefthalf"></td>
+          <td id="imgtitle" class="righthalf">Three Tier Architecture</td>
+        </tr>
+        <tr>
+            <td id="lefthalf"><h5>The web application is constructed based on one of the well-known client-server architectures called three-tier architecture, which includes presentations, logic and data tiers. The presentation is the top level, which is the user interface, this is written using the OpenLayers API and JavaScript codes. The logic tier coordinates the application, which takes care of processes and calculations. All calculations are done using Python, the requests for these processes are sent from the server to Python by making use of AJAX-requests and an intermediate PHP-file. The data tier means the storage of data, which in our case is stored locally on the server. </h5></td>
+            <td class="righthalf"><img id="architectureimg" src="Images/Architecture.png"></img></td>
+        </tr>
+        <tr>
+          <td id="lefthalf"></td>
+          <td id="imgsource" class="righthalf">Source: Own Work</td>
+        </tr>
+      </table>
+  </div>
+</div>
+
+<!-- Fifth Grid -->
+<div id="attribution" class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+      <h1>Attribution</h1>
+      <h5 class="w3-padding-32">The following datasets/services are used in order to run the application. Even if many are licensed by a Creative Commons Zero license, they are still references here so that you can easily find where the data is coming from.</h5>
+       <table>
+        <tr>
+			<th class="attrone">Data</th>
+			<th class="attrtwo">Provider</th>
+			<th class="attrthree">Link</th>
+			<th class="attfour">Creative Commons</th>
+        </tr>
+        <tr>
+            <td class="attrone">Baselayer background</td>
+            <td class="attrtwo">Openstreet Map</td>
+            <td class="attrthree"><a id="attrlink" href="https://www.openstreetmap.org">https://www.openstreetmap.org</td>
+            <td class="attfour"><a id='CC-CC' class="fab fa-creative-commons w3-xlarge" href="http://creativecommons.org/licenses/by-sa/4.0/"></a><a id='CC-BY' class="fab fa-creative-commons-by w3-xlarge" href="http://creativecommons.org/licenses/by-sa/4.0/"></a><a id='CC-SA' class="fab fa-creative-commons-sa w3-xlarge" href="http://creativecommons.org/licenses/by-nc/4.0/"></a></td>
+        </tr>
+        <tr>
+			<td class="attrone">Municipality Border</td>
+			<td class="attrtwo">PDOK</td>
+			<td class="attrthree"><a id="attrlink" href="https://www.pdok.nl/nl/producten/pdok-downloads/basis-registratie-kadaster/bestuurlijke-grenzen-actueel">https://www.pdok.nl/nl/producten/pdok-downloads/...</td>
+			<td class="attfour"><a id='CC-CC' class="fab fa-creative-commons w3-xlarge" href="http://creativecommons.org/licenses/by/4.0/"></a><a id='CC-BY' class="fab fa-creative-commons-by w3-xlarge" href="http://creativecommons.org/licenses/by/4.0/"></a></td>
+        </tr>
+        <tr>
+			<td class="attrone">Aerial background</td>
+			<td class="attrtwo">PDOK</td>
+			<td class="attrthree"><a id="attrlink" href="https://geodata.nationaalgeoregister.nl/luchtfoto/rgb/wms?request=GetCapabilities">https://geodata.nationaalgeoregister.nl/luchtfoto/rgb/...</td>
+			<td class="attfour"><a id='CC-CC' class="fab fa-creative-commons w3-xlarge" href="http://creativecommons.org"></a></td>
+        </tr>
+        <tr>
+			<td class="attrone">AHN3 Point cloud</td>
+			<td class="attrtwo">PDOK</td>
+			<td class="attrthree"><a id="attrlink" href="https://www.pdok.nl/nl/ahn3-downloads">https://www.pdok.nl/nl/ahn3-downloads</td>
+			<td class="attfour"><a id='CC-CC' class="fab fa-creative-commons w3-xlarge" href="http://creativecommons.org"></a></td>
+        </tr>
+        <tr>
+			<td class="attrone">Building Footprints</td>
+			<td class="attrtwo">PDOK - BAG</td>
+			<td class="attrthree"><a id="attrlink" href="https://www.pdok.nl/nl/service/wms-bag">https://www.pdok.nl/nl/service/wms-bag</a></td>
+			<td class="attfour"><a id='CC-CC' class="fab fa-creative-commons w3-xlarge" href="http://creativecommons.org"></a></td>
+        </tr>
+      </table>
+  </div>
+</div>
+
+<!-- Sixth Grid -->
+<div id="links" class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+  <div class="w3-content">
+      <h1>Download Links</h1>
+      <a id="clicklink" href="Downloads/UrbanHorizon_ExecutiveSummary.pdf" download>Executive Summary</a><br>
+      <a id="clicklink" href="Downloads/UrbanHorizon_FullReport.pdf" download>Full Report</a><br>
+      <a id="clicklink" href="svfscript.py" download>SVF Python Script</a><br>
+      <a id="clicklink" href="Downloads/tiling.py" download>Tiling Python Script</a> <br>
+      <a id="clicklink" href="responsePHP.php">PHP Server-Python Connection Script</a><br>
+      <a id="clicklink" href="https://laszip.org/">LASzip.org</a>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer id="footer">  
+ <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+  <a id='CC-CC-f' class="fab fa-creative-commons w3-xlarge" href="http://creativecommons.org/licenses/by-nc/4.0/"></a>
+  <a id='CC-BY-f' class="fab fa-creative-commons-by w3-xlarge" href="http://creativecommons.org/licenses/by-nc/4.0/"></a>
+  <a id='CC-NC-f' class="fab fa-creative-commons-nc w3-xlarge" href="http://creativecommons.org/licenses/by-nc/4.0/"></a>
+ <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Skyview Calculation Web Application</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Urban Horizon Group</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.<br />
+</footer>
+
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+	function myFunction() {
+			var x = document.getElementById("navDemo");
+			if (x.className.indexOf("w3-show") == -1) {
+				x.className += " w3-show";
+			} else { 
+				x.className = x.className.replace(" w3-show", "");
+			}
+		}
+</script>
+
+</body>
+</html>
